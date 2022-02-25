@@ -1,11 +1,5 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
 using System.Drawing;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
 
 namespace Simulation_Lab_3
@@ -16,13 +10,13 @@ namespace Simulation_Lab_3
         {
             InitializeComponent();
         }
-        
+
         // Массив значение 2^3, для поиска позиций в правилах.
         string[] positions = new string[] { "111", "110", "101", "100", "011", "010", "001", "000" };
         // Число "правил", преобразованное в двоичную форму и разбитое на символьный массив.
         char[] cellRules;
         // Запрет воздействия на ячейки, после нажатия кнопки старт.
-        bool start = true; 
+        bool start = true;
         // Переменная указывающая количество используемых строк.
         int rowCounter = 0;
 
@@ -45,7 +39,7 @@ namespace Simulation_Lab_3
                     binaryCode = "0" + binaryCode;
                 }
             }
-            
+
             result = binaryCode.ToCharArray();
 
             return result;
@@ -79,7 +73,7 @@ namespace Simulation_Lab_3
             dataGridView.Rows.Clear();       // Очищается вся таблица
 
             // Удаляются все колонки
-            for (int i = 0; i < dataGridView.Columns.Count; i++)                 
+            for (int i = 0; i < dataGridView.Columns.Count; i++)
             {
                 dataGridView.Columns.RemoveAt(0);
             }
@@ -87,9 +81,9 @@ namespace Simulation_Lab_3
             // Добавляется количество колонок, запрошенное пользователем.
             for (int i = 0; i < (int)nudColumnsCount.Value; i++)
             {
-                dataGridView.Columns.Add("","");
+                dataGridView.Columns.Add("", "");
             }
-            
+
             // Добавляется первичная строка, для пользовательского взаимодействия.
             dataGridView.Rows.Add();
 
@@ -106,7 +100,7 @@ namespace Simulation_Lab_3
             btnStart.Enabled = false;   // Отключается возможность повторного старта программы.
 
             start = false;              // Вводится запрет на изменение ячеек пользователем.
-            
+
             rowCounter = 0;
             timer1.Start();             // Компиляция основного кода программы.
         }
@@ -127,17 +121,17 @@ namespace Simulation_Lab_3
         private void dataGridView_CellMouseClick(object sender, DataGridViewCellMouseEventArgs e)
         {
             if (start)
-            switch (e.Button)
-            {
-                case MouseButtons.Left:
-                    dataGridView[e.ColumnIndex, e.RowIndex].Style.BackColor = Color.Red;
-                    dataGridView.ClearSelection();
-                    break;
-                case MouseButtons.Right:
-                    dataGridView[e.ColumnIndex, e.RowIndex].Style.BackColor = Color.White;
-                    dataGridView.ClearSelection();
-                    break;
-            }
+                switch (e.Button)
+                {
+                    case MouseButtons.Left:
+                        dataGridView[e.ColumnIndex, e.RowIndex].Style.BackColor = Color.Red;
+                        dataGridView.ClearSelection();
+                        break;
+                    case MouseButtons.Right:
+                        dataGridView[e.ColumnIndex, e.RowIndex].Style.BackColor = Color.White;
+                        dataGridView.ClearSelection();
+                        break;
+                }
         }
 
         /// <summary>
@@ -155,6 +149,12 @@ namespace Simulation_Lab_3
         /// <summary>
         /// Основной процесс моделирования.
         /// </summary>
+        /// Алгоритм:
+        /// 1. Считываем предыдущую строку в массив (белые ячейки - 0, красные ячейки - 1).
+        /// 2. Создаем новую строку, для нового шага имитации.
+        /// 3. Вычисляем значения для новых ячеек, с использованием указанных правил
+        ///    в массив (белые ячейки - 0, красные ячейки - 1).
+        /// 4. Закрашиваем ячейки новой строки, используя созданный на Шаге 3 массив.
         private void timer1_Tick(object sender, EventArgs e)
         {
             // Массив предыдущих значений поколения.
@@ -165,7 +165,7 @@ namespace Simulation_Lab_3
 
             // Комбинация для вычисления будущего значения ячейки.
             char[] xyz = new char[3];
-            
+
             // Заполнение массива предыдущих значений.
             for (int i = 0; i < previousLayer.Length; i++)
             {
@@ -178,7 +178,7 @@ namespace Simulation_Lab_3
             rowCounter++;
 
             // Вычисление значений нового поколения на основе предыдущих значений.
-            for (int i = 0; i < currentLayer.Length;i++)
+            for (int i = 0; i < currentLayer.Length; i++)
             {
                 if (i == 0 | i == currentLayer.Length - 1)
                 {
