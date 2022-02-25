@@ -30,6 +30,8 @@
         {
             this.components = new System.ComponentModel.Container();
             this.splitContainer1 = new System.Windows.Forms.SplitContainer();
+            this.btnStop = new System.Windows.Forms.Button();
+            this.btnStart = new System.Windows.Forms.Button();
             this.btnCreate = new System.Windows.Forms.Button();
             this.label2 = new System.Windows.Forms.Label();
             this.nudRules = new System.Windows.Forms.NumericUpDown();
@@ -37,7 +39,6 @@
             this.nudColumnsCount = new System.Windows.Forms.NumericUpDown();
             this.dataGridView = new System.Windows.Forms.DataGridView();
             this.timer1 = new System.Windows.Forms.Timer(this.components);
-            this.btnStart = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.splitContainer1)).BeginInit();
             this.splitContainer1.Panel1.SuspendLayout();
             this.splitContainer1.Panel2.SuspendLayout();
@@ -58,6 +59,7 @@
             // 
             // splitContainer1.Panel1
             // 
+            this.splitContainer1.Panel1.Controls.Add(this.btnStop);
             this.splitContainer1.Panel1.Controls.Add(this.btnStart);
             this.splitContainer1.Panel1.Controls.Add(this.btnCreate);
             this.splitContainer1.Panel1.Controls.Add(this.label2);
@@ -71,6 +73,30 @@
             this.splitContainer1.Size = new System.Drawing.Size(1190, 563);
             this.splitContainer1.SplitterDistance = 280;
             this.splitContainer1.TabIndex = 0;
+            // 
+            // btnStop
+            // 
+            this.btnStop.Enabled = false;
+            this.btnStop.Font = new System.Drawing.Font("Microsoft Sans Serif", 11.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            this.btnStop.Location = new System.Drawing.Point(35, 272);
+            this.btnStop.Name = "btnStop";
+            this.btnStop.Size = new System.Drawing.Size(119, 44);
+            this.btnStop.TabIndex = 6;
+            this.btnStop.Text = "Stop";
+            this.btnStop.UseVisualStyleBackColor = true;
+            this.btnStop.Click += new System.EventHandler(this.btnStop_Click);
+            // 
+            // btnStart
+            // 
+            this.btnStart.Enabled = false;
+            this.btnStart.Font = new System.Drawing.Font("Microsoft Sans Serif", 11.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            this.btnStart.Location = new System.Drawing.Point(35, 222);
+            this.btnStart.Name = "btnStart";
+            this.btnStart.Size = new System.Drawing.Size(119, 44);
+            this.btnStart.TabIndex = 5;
+            this.btnStart.Text = "Start";
+            this.btnStart.UseVisualStyleBackColor = true;
+            this.btnStart.Click += new System.EventHandler(this.btnStart_Click);
             // 
             // btnCreate
             // 
@@ -124,11 +150,6 @@
             // nudColumnsCount
             // 
             this.nudColumnsCount.Location = new System.Drawing.Point(35, 57);
-            this.nudColumnsCount.Maximum = new decimal(new int[] {
-            50,
-            0,
-            0,
-            0});
             this.nudColumnsCount.Minimum = new decimal(new int[] {
             8,
             0,
@@ -167,19 +188,7 @@
             // 
             // timer1
             // 
-            this.timer1.Interval = 1000;
             this.timer1.Tick += new System.EventHandler(this.timer1_Tick);
-            // 
-            // btnStart
-            // 
-            this.btnStart.Font = new System.Drawing.Font("Microsoft Sans Serif", 11.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.btnStart.Location = new System.Drawing.Point(35, 222);
-            this.btnStart.Name = "btnStart";
-            this.btnStart.Size = new System.Drawing.Size(119, 44);
-            this.btnStart.TabIndex = 5;
-            this.btnStart.Text = "Start";
-            this.btnStart.UseVisualStyleBackColor = true;
-            this.btnStart.Click += new System.EventHandler(this.btnStart_Click);
             // 
             // Form1
             // 
@@ -212,6 +221,7 @@
         private System.Windows.Forms.DataGridView dataGridView;
         private System.Windows.Forms.Timer timer1;
         private System.Windows.Forms.Button btnStart;
+        private System.Windows.Forms.Button btnStop;
     }
 }
 

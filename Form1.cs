@@ -22,17 +22,17 @@ namespace Simulation_Lab_3
         char[] cellRules;
         bool start = true; /// Запрет воздействия на ячейки, после нажатия кнопки старт.
         int rowCounter = 0;
-        int colCounter = 0;
 
         private char[] acceptRules(int rule)
         {
             char[] result;
 
             string binaryCode = Convert.ToString(rule, 2);
-            
-            if (binaryCode.Length != 8)
+
+            int binaryLength = binaryCode.Length;
+            if (binaryLength != 8)
             {
-                for (int i = 0; i < 8 - binaryCode.Length; i++)
+                for (int i = 0; i < 8 - binaryLength; i++)
                 {
                     binaryCode = "0" + binaryCode;
                 }
@@ -49,7 +49,7 @@ namespace Simulation_Lab_3
 
             string code = new string(xyz);
 
-            int index = Array.IndexOf(xyz, positions);
+            int index = Array.IndexOf(positions, code);
 
             result = cellRules[index];
 
@@ -60,6 +60,7 @@ namespace Simulation_Lab_3
         {
             nudColumnsCount.Enabled = false;
             nudRules.Enabled = false;
+            btnStart.Enabled = true;
 
             dataGridView.Rows.Clear();                      
 
@@ -82,10 +83,22 @@ namespace Simulation_Lab_3
         private void btnStart_Click(object sender, EventArgs e)
         {
             btnCreate.Enabled = false;
-            
+            btnStop.Enabled = true;
+            btnStart.Enabled = false;
+
             start = false;
 
             timer1.Start();
+        }
+        private void btnStop_Click(object sender, EventArgs e)
+        {
+            timer1.Stop();
+            btnStart.Enabled = false;
+            btnCreate.Enabled = true;
+            btnStop.Enabled = false;
+            start = true;
+            nudColumnsCount.Enabled = true;
+            nudRules.Enabled = true;
         }
 
         private void dataGridView_CellMouseClick(object sender, DataGridViewCellMouseEventArgs e)
@@ -119,9 +132,6 @@ namespace Simulation_Lab_3
             char[] currentLayer = new char[dataGridView.Columns.Count];
             char[] xyz = new char[3];
             
-            rowCounter = 0;
-            colCounter = 0;
-
             for (int i = 0; i < previousLayer.Length; i++)
             {
                 if (dataGridView[i, rowCounter].Style.BackColor == Color.Red) previousLayer[i] = '1';
@@ -129,6 +139,7 @@ namespace Simulation_Lab_3
             }
 
             dataGridView.Rows.Add();
+            rowCounter++;
 
             for (int i = 0; i < currentLayer.Length;i++)
             {
@@ -152,7 +163,11 @@ namespace Simulation_Lab_3
                 currentLayer[i] = calculateLayerCellValue(xyz);
             }
 
-
+            for (int i = 0; i < currentLayer.Length; i++)
+            {
+                if (currentLayer[i] == '0') dataGridView[i, rowCounter].Style.BackColor = Color.White;
+                else dataGridView[i, rowCounter].Style.BackColor = Color.Red;
+            }
         }
     }
 }
