@@ -106,7 +106,8 @@ namespace Simulation_Lab_3
             btnStart.Enabled = false;   // Отключается возможность повторного старта программы.
 
             start = false;              // Вводится запрет на изменение ячеек пользователем.
-
+            
+            rowCounter = 0;
             timer1.Start();             // Компиляция основного кода программы.
         }
         private void btnStop_Click(object sender, EventArgs e)
