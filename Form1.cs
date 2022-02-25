@@ -20,6 +20,7 @@ namespace Simulation_Lab_3
         // 111 110 101 100 011 010 001 000
         string[] positions = new string[] { "111", "110", "101", "100", "011", "010", "001", "000" };
         char[] cellRules;
+        bool start = true;
 
         private char[] acceptRules(int rule)
         {
@@ -40,28 +41,42 @@ namespace Simulation_Lab_3
             return result;
         }
 
-        private void btnStart_Click(object sender, EventArgs e)
+        private void btnCreate_Click(object sender, EventArgs e)
         {
-
             dataGridView.Rows.Clear();                      
             int count = dataGridView.Columns.Count;
+
             for (int i = 0; i < count; i++)                 
             {
                 dataGridView.Columns.RemoveAt(0);
             }
+
             int columnsCount = (int)nudColumnsCount.Value;
+
             for (int i = 0; i < columnsCount; i++)
             {
                 dataGridView.Columns.Add("","");
             }
             
             dataGridView.Rows.Add();
+
             int rule = (int)nudRules.Value;
             cellRules = acceptRules(rule);
         }
 
+        private void btnStart_Click(object sender, EventArgs e)
+        {
+            nudColumnsCount.Enabled = false;
+            nudRules.Enabled = false;
+            btnCreate.Enabled = false;
+            start = false;
+
+            
+        }
+
         private void dataGridView_CellMouseClick(object sender, DataGridViewCellMouseEventArgs e)
         {
+            if (start)
             switch (e.Button)
             {
                 case MouseButtons.Left:
