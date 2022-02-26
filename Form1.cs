@@ -180,23 +180,9 @@ namespace Simulation_Lab_3
             // Вычисление значений нового поколения на основе предыдущих значений.
             for (int i = 0; i < currentLayer.Length; i++)
             {
-                if (i == 0 | i == currentLayer.Length - 1)
-                {
-                    if (i == 0) xyz[0] = previousLayer[currentLayer.Length - 1];
-                    else xyz[0] = previousLayer[i - 1];
-                    xyz[1] = previousLayer[i];
-                    if (i == 0) xyz[2] = previousLayer[i + 1];
-                    else xyz[2] = previousLayer[0];
-
-                    currentLayer[i] = calculateLayerCellValue(xyz);
-
-                    continue;
-                }
-
-                xyz[0] = previousLayer[i - 1];
+                xyz[0] = previousLayer[(i + previousLayer.Length - 1) % previousLayer.Length];
                 xyz[1] = previousLayer[i];
-                xyz[2] = previousLayer[i + 1];
-
+                xyz[2] = previousLayer[(i + previousLayer.Length + 1) % previousLayer.Length];
                 currentLayer[i] = calculateLayerCellValue(xyz);
             }
 
