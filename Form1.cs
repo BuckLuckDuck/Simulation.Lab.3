@@ -124,11 +124,11 @@ namespace Simulation_Lab_3
                 switch (e.Button)
                 {
                     case MouseButtons.Left:
-                        dataGridView[e.ColumnIndex, e.RowIndex].Style.BackColor = Color.Red;
+                        dataGridView[e.ColumnIndex, e.RowIndex].Style.BackColor = Color.Aqua;
                         dataGridView.ClearSelection();
                         break;
                     case MouseButtons.Right:
-                        dataGridView[e.ColumnIndex, e.RowIndex].Style.BackColor = Color.White;
+                        dataGridView[e.ColumnIndex, e.RowIndex].Style.BackColor = Color.Gray;
                         dataGridView.ClearSelection();
                         break;
                 }
@@ -169,7 +169,7 @@ namespace Simulation_Lab_3
             // Заполнение массива предыдущих значений.
             for (int i = 0; i < previousLayer.Length; i++)
             {
-                if (dataGridView[i, rowCounter].Style.BackColor == Color.Red) previousLayer[i] = '1';
+                if (dataGridView[i, rowCounter].Style.BackColor == Color.Aqua) previousLayer[i] = '1';
                 else previousLayer[i] = '0';
             }
 
@@ -203,8 +203,8 @@ namespace Simulation_Lab_3
             // Покраска ячеек в новосозданной строке.
             for (int i = 0; i < currentLayer.Length; i++)
             {
-                if (currentLayer[i] == '0') dataGridView[i, rowCounter].Style.BackColor = Color.White;
-                else dataGridView[i, rowCounter].Style.BackColor = Color.Red;
+                if (currentLayer[i] == '0') dataGridView[i, rowCounter].Style.BackColor = Color.Gray;
+                else dataGridView[i, rowCounter].Style.BackColor = Color.Aqua;
             }
         }
     }
